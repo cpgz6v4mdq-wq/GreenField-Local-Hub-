@@ -1,0 +1,112 @@
+.shop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-bottom: 500px;
+}
+
+main {
+    display: flex;
+}
+.category {
+    padding: 10px;
+    width: 161px;
+    height: 1028px;
+    background-color: #FDFDFD;
+    border: 1px solid black;
+    box-shadow: 7px 0px 8.2px 0px rgba(0, 0, 0, 0.219);
+}
+
+.category button {
+    margin-top: 15px;
+    background-color: #E1E289;
+    border-radius: 8px;
+    box-shadow: 0px 5px 4.7px 0px rgba(0, 0, 0, 0.342);
+    width: 120px;
+    height: 33px;
+    border: none;
+    transition: box-shadow 0.5s ease, background-color 0.5s ease;
+    margin-bottom: 15px;
+}
+
+.category button:hover {
+    box-shadow: 0px 0px 0px 0px;
+    background-color: #cfd185;
+}
+
+.product {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 15px;
+    width: 200px;
+    height: 300px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+    box-shadow: 0px 7px 6.3px 0px rgba(0, 0, 0, 0.336);
+    border-radius: 16px;
+    font-family: "Inter", sans-serif;
+    
+}
+
+form div {
+    display: flex;
+}
+
+.product h1 {
+    font-size: 20px;
+}
+.product p {
+    font-size: 16px;
+}
+
+.product button {
+    border-radius: 8px;
+    border: 1px solid rgba(15, 15, 15, 0.274);
+    width: 85px;
+    height: 33px;
+    font-size: 14px;
+    background-color: #ACD2ED;
+    box-shadow: 0px 3px 4.6px 0px #1f1e1e37;
+    
+}
+
+.product button:hover {
+    background-color: #98b8cf;
+}
+
+.product img {
+    border-radius: 5px;
+}
+
+@media (max-width: 800px) {
+    
+    .product {
+        margin-bottom: 15px;
+    }
+    main {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .category {
+        height: auto;
+        width: 350px;
+        font-size: larger;
+    }
+    .category form {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+    .category form button {
+        margin-left: auto;
+    }
+    
+    
+}

@@ -1,0 +1,70 @@
+<!-- Allows for the navbar and footer to be used across all html files --> 
+{% extends "base.html" %}
+
+<!-- Allows for the html content to be displayed --> 
+{% block content %}
+    <!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}{{product["product"]}}{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/product_page.css')}}">
+    <main>
+        <div class="product_information">
+            <h1>Product information</h1>
+            <img src="{{product['image']}}" alt="">
+            <h1>{{product["product"]}}</h1>
+            <div style="margin-right: auto;">
+                <h2>Description</h2>
+                <p>{{product["desc"]}}</p>
+            </div>
+        </div>
+        <div class="billing">
+            <form action="{{url_for('buy_product', product_id=product['id'])}}" method="post" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <h1>Name</h1>
+                <input type="text" placeholder="Bill" name="name">
+                <h1>Card number</h1>
+                <input type="text" name="card_number">
+                <div class="card_details">
+                    <div>
+                        <h1>Expiry Date</h1>
+                        <input type="date" name="date">
+                    </div>
+                    <div >
+                        <h1>CVV</h1>
+                        <input type="text" name="CVV">
+                    </div>
+
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; padding-left: 10px; padding-right: 10px;">
+                    <p>If you choose to collect your product. Please click collect and you will be able to go to the location</p>
+                
+                    <p>Input 1 in order to collect your product</p>
+                    <input type="number" name="collect" min="0" max="1" style="width: 120px;">
+                </div>
+                    
+                
+                <h1>Price</h1>
+                <div style="display: flex;">
+                    <!-- if user has loyalty scheme they will be able to see the discounts on products --> 
+                    {% if loyalty == 1 %}
+                        
+                        <p>£{{discounted_price}}</p>
+                        <p style="text-decoration: line-through; color: gray; margin-left: 10px;">£{{product["price"]}}</p>
+                    {% else %}
+                        <p>£{{product["price"]}}</p>
+                    {% endif %}
+                </div>
+                <button type="submit">Buy</button>
+            </form>
+
+        </div>
+    </main>
+    <section></section>
+        
+        
+        
+        
+    
+
+{% endblock %}

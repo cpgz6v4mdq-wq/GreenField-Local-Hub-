@@ -1,0 +1,36 @@
+<!-- Allows for the navbar and footer to be used across all html files --> 
+{% extends "base.html" %}
+
+<!-- Allows for the html content to be displayed --> 
+{% block content %}
+    <!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}{{user}} orders{% endblock %}
+    </title>
+    <link rel="stylesheet" href="/static/css/orders.css">
+    <main>
+        <h1>Your orders</h1>
+        {% for product in products %}
+            <div class="name">
+                <p>Name</p>
+                <p>Total</p>
+                <p>Delivery type</p>
+            </div>
+            <section class="product">
+                <img src="{{product['image']}}" alt="" width="50px">
+                <p>{{product["product"]}}</p>
+                
+                <p>£{{product["price"]}}</p>
+                {% if product["collect"] == 1 %}
+                    <p>Collect</p>
+                {% else %}
+                    <p>Delivery</p>
+
+                {% endif %}
+                <a href="{{url_for('cancel_orders', product_id=product['id'])}}" class="cancel"><button>Cancel Order</button></a>
+                
+            </section>
+        {% endfor %}
+    </main>
+{% endblock %}

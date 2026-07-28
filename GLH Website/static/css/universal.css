@@ -1,0 +1,151 @@
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0px;
+    background-color: aliceblue;
+
+    
+}
+.navigation {
+    background-image: url(/static/Images/Navbar_background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center left;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid black;
+
+}
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+@media (max-width: 800px) {
+    .navigation {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+   
+    
+}
+.navigation a {
+    color: aliceblue;
+    margin: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: "Inter";
+}
+.navigation a:hover {
+    color: rgb(204, 209, 214);
+}
+
+.navigation img {
+    width: 50px;
+    background-color: aliceblue;
+    border-radius: 100px;
+}
+
+.blue_btn {
+    width: 91px;
+    height: 37px;
+    border-radius: 11px;
+    background-color: #ACD2ED;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+}
+.blue_btn:hover {
+    background-color: #8babc2;
+}
+.GLH_footer {
+    background-color: #99AA38;
+    
+    min-height: 50px;
+}
+
+.GLH_footer img {
+    width: 120px;
+}
+
+.join_us_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    width: 200px;
+    color: aliceblue;
+    
+}
+.start {
+    background-image: url(/static/Images/Home/Nature.jpg);
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    min-height: 250px;
+    border-bottom: 4px solid black;
+    padding: 10px;
+    color: aliceblue;
+    box-shadow: 0px 7px 8px 1px rgba(0, 0, 0, 0.384);
+    
+
+}
+.join_us {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2B8C40;
+    padding: 20px;
+    max-width: 800px;
+    border-radius: 10px;
+    margin: 10px;
+}
+.email_input  {
+    color: aliceblue;
+}
+
+.email_input button {
+    background-color: aliceblue;
+    border-radius: 100%;
+    border: none;
+    font-weight: bolder;
+    font-size: larger;
+}
+.email_input button:hover {
+    background-color: rgb(205, 211, 216);
+}
+.email_input input {
+    margin: 0;
+    border-radius: 42px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+@media (max-width: 800px) {
+    .join_us_content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        
+    }
+    .join_us {
+        flex-direction: column;
+        
+    }
+}

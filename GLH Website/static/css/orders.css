@@ -1,0 +1,72 @@
+.name {
+    display: flex;
+    
+
+}
+
+.product {
+    display: flex;
+}
+
+.name p {
+    margin-left: 15px;
+}
+
+.product p {
+    margin-left: 15px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 600px;
+}
+
+section img {
+    width: 250px;
+    margin-bottom: 14px;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+
+
+.cancel {
+    margin-left: 200px;
+}
+.cancel button {
+    
+    background-color: #F22B2B;
+    padding: 5px;
+    border: none;
+    box-shadow: 0px 5px 4.7px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 8px;
+    margin: 5px;
+
+}
+
+.cancel button:hover {
+    background-color: #c72424;
+}
+
+@media (max-width: 800px) {
+    .product {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cancel {
+        margin-left: 0px;
+    }
+
+    .product p {
+        margin-left: 0px;
+    }
+
+    .name {
+        opacity: 0;
+    }
+}

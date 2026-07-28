@@ -1,0 +1,48 @@
+<!-- Allows for the navbar and footer to be used across all html files --> 
+{% extends "base.html" %}
+
+<!-- Allows for the html content to be displayed --> 
+{% block content %}
+    <!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}{{user_type}} account settings{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/accountSettings.css')}}">
+    
+    
+    
+        <!-- Checks on if the user is a customer. If user is customer the html content below will be displayed for customer --> 
+        {% if user_type == "customer" %}
+            <button onclick="CustomerpersonalSettings()">Update personal settings</button>
+            <div id="customer_personal_settings"></div>
+            {% if display_message %}
+                <p>{{display_message}}</p>
+            {% endif %}
+            
+            {% if loyalty == "1" %}
+                <a class="links" href="/cancel_loyalty"><button>Cancel loyalty scheme</button></a>
+            {% endif %}
+            <button>Billing information</button>
+            
+            <button>Address</button>
+            <p>Billing information and address is unavailable features within the prototype</p>
+        <!-- Checks on if the user is a producer. If user is producer the html content below will be displayed for producer --> 
+        {% elif user_type == "producer" %}
+            <button onclick="ProducerpersonalSettings()">Update personal settings</button>
+            <div id="producer_personal_settings">
+                
+            </div>
+            {% if display_message %}
+                <p>{{display_message}}</p>
+            {% endif %}
+            <button onclick="changeFarmDetails()">Update farm information</button>
+            <div id="producer_farm_settings"></div>
+        {% endif %}
+        <div class="option">
+            <a class="links" href="/logout"><button class="logout">Logout</button></a>
+            <a class="links" href="/delete_account"><button class="delete">Delete Account</button></a>
+        </div>
+    
+    <script src="{{url_for('static', filename='js/accountSettings.js')}}"></script>
+{% endblock %}

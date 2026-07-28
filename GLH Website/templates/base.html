@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='Images/favicon_io/favicon-32x32.png')}}">
+    <!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}Home{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/universal.css')}}">
+    <!-- APIs for map and fonts --> 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navigation" id="navbar">
+        <a href="/"><img src="{{url_for('static', filename='Images/Logo.png')}}" alt="Logo of GLH" draggable="false"></a>
+        
+            
+            <a href="/support_local_farms">Our Goal</a>
+            <a href="/map">Map</a>
+            <a href="/shop">Shop</a>
+            {% if user %}
+                <p style="color: aliceblue; size: 14px; font-weight: bold;">Signed in as {{user}}</p>
+                <a href="/logout">Logout</a>
+                {% if user_type == "customer" %}
+                    <a href="/dashboard">Customer Dashboard</a>
+                {% else %}
+                    <a href="/dashboard">Producer Dashboard</a>
+                {% endif %}
+            {% else %}
+                <a href="/login_signup">Login</a>
+            {% endif %}
+        
+        
+
+    </nav>
+    <!-- Allows for the html content to be displayed --> 
+    {% block content %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}">
+        <div class="start">
+            <h1>Greenfield Local Hub</h1>
+            <h2>Where local producers sell and locals buy</h2>
+            <div>
+                <a href="/shop"><Button class="blue_btn">Shop</Button></a>
+                <a href="/map"><button class="blue_btn">Map</button></a>
+            </div>
+        </div>
+    <main>
+        
+        <section class="learnMore">
+            <div class="content">
+                <h1>You can buy directly from your local food producer from the shop</h1>
+                <p>Why support your local food producer? Find out here</p>
+                <a href="/support_local_farms"><button class="blue_btn">See More</button></a>
+            </div>
+            <img src="{{url_for('static', filename='Images/Home/localFoodMarket.webp')}}" alt="Image of a food market">
+        </section>
+        <h1>Featured Farms</h1>
+        
+            <div class="top_picks">
+                {% for farm in farms %}
+                <section class="product">
+                    <img src="{{farm['image']}}" alt="" width="120px">
+                    <h1>{{farm["farm"]}}</h1>
+                    <p style="word-break: break-all;">{{farm["description"]| truncate(40)}}</p>
+                    <p>Contact us: +44 {{farm["telephone"]}}</p>
+                    <p>{{farm["website"]}}</p>
+
+                </section>
+                {% endfor %}
+            </div>
+        
+        <section class="top_picks"><h1>Top picks from the shop</h1></section>
+        <div class="top_picks">
+            
+            {% for product in products %}
+                <section class="product">
+                    <img src="{{product['image']}}" alt="{{product['image']}}" width="120px">
+                    <h1>{{product["product"]}}</h1>
+                    
+                    <p>{{product["desc"]| truncate(15)}}</p>
+                    <div style="display: flex; align-items: center;
+                    justify-content: center;">
+                        <a href="{{url_for('view_product', product_id=product['id'])}}"><button>Buy</button></a>
+                        {% if loyalty == 1 %}
+                            <p style="margin-left: 15px; text-decoration: line-through;">£{{product["price"]}}</p>
+                            <p style="margin-left: 15px;">£{{(product["price"] | float * 0.8) | round(2)}}</p>
+
+                            {% else %}
+                                <p style="margin-left: 15px;">£{{product["price"]}}</p>
+                        {% endif %}
+                    </div>
+
+                </section>
+            {% endfor %}
+        </div>
+        <section class="join_us">
+            <div class="join_us_content">
+                <h1>Join us</h1>
+                <p>Your support helps your local food producers and farms</p>
+            </div>
+            <form class="email_input" action="/marketing" method="post">
+                <p>Enter Email</p>
+                <input type="email" placeholder="bill@example.com" name="email">
+                <button type="submit" onclick="marketing()">></button>
+                <p id="output_message"></p>
+            </form>
+        </section>
+    </main>
+        
+    {% endblock %}
+    <footer class="GLH_footer">
+        <img src="{{url_for('static', filename='Images/Logo.png')}}" alt="Logo of GLH" draggable="false" >
+    </footer>
+    <script src="{{url_for('static', filename='js/navbar.js')}}"></script>
+    <script src="{{url_for('static', filename='js/marketing.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!-- Allows for the navbar and footer to be used across all html files --> 
+{% extends "base.html" %}
+
+<!-- Allows for the html content to be displayed --> 
+{% block content %}
+    <!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}{{user}} product management{% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/manageProduct.css')}}">
+    <main>
+        <h1>Products sold</h1>
+        <p>Products you sell will display here</p>
+    <!-- Displays all products that are fetched from the products table --> 
+    {% for product in products %}
+        
+            <section>
+                <img src="{{product['image']}}" alt="" width="250px">
+                <p>{{product["product"]}}</p>
+                <form action="{{url_for('product_name', product_id=product['id'])}}" method="post">
+                    <p>Change product name</p>
+                    <input type="text" name="product">
+                    <button type="submit">Change</button>
+                </form>
+                <form action="{{url_for('product_description', product_id=product['id'])}}" method="post">
+                    <p>Change product description</p>
+                    
+                    <textarea name="description" id=""></textarea>
+                    <button type="submit">Change</button>
+
+                </form>
+                <form action="{{url_for('product_image', product_id=product['id'])}}" method="post">
+                    <p>Change product image (upload image link)</p>
+                    <input type="text" name="image">
+                    <button type="submit">Change</button>
+                </form>
+                <form action="{{url_for('product_price', product_id=product['id'])}}" method="post">
+                    <p>Change product price</p>
+                    <input type="number" min="0" step="0.01" placeholder="8.99" name="price">
+                    <button type="submit">Change</button>
+
+                </form>
+                <a class="Delete" href="{{url_for('delete_product', product_id=product['id'])}}"><button>Delete {{product["product"]}} product</button></a>
+            </section>
+       
+        
+    {% endfor %}
+    </main>
+
+{% endblock %}

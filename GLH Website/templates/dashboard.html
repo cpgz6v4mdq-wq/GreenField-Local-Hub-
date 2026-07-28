@@ -1,0 +1,214 @@
+<!-- Allows for the navbar and footer to be used across all html files --> 
+{% extends "base.html" %}
+
+<!-- Allows for the html content to be displayed --> 
+{% block content %}
+    <!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}{{user_type}} dashboard{% endblock %}
+    </title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/dashboard.css')}}">
+
+    <!-- If user type is producer and they are new to the service. The user will be asked to register their farm details -->
+    {% if user_type == "producer" and producer_new == 0 %}
+        <main class="new_producer_main">
+            <h1>Hello {{user}}</h1>
+            <p>Lets get you set up so you can start selling your products online</p>
+            <form action="/new_farm" method="post" class="new_producer">
+                <h2>What is your farm name?</h2>
+                <input type="text" name="farm_name" placeholder="bill's farm">
+                <h2>Enter a description for your farm</h2>
+                <textarea name="description" maxlength="1000" minlength="50" style="max-width: 300px;"></textarea>
+                <h2>What is your telephone number?</h2>
+                <input 
+                    type="tel" 
+                     
+                    name="phone_number" 
+                    placeholder="e.g. 07700 900123 or +44 7700 900123"
+                    pattern="^(\+44\s?7\d{3}|\(?07\d{3}\)?)\s?\d{3}\s?\d{3}$|^(\+44\s?20\s?\d{4}\s?\d{4}|\(?0\d{2,4}\)?\s?\d{3,4}\s?\d{3,4})$"
+                    required maxlength="15"
+                >
+                <h2>Add a link to your website (optional)</h2>
+                <input type="url" name="website_link" maxlength="250">
+                <h2>Add an image link for your farm</h2>
+                <input type="text" name="image">
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+    <!-- Checks on if the user is a producer. If user is producer the html content below will be displayed for producer --> 
+    {% elif user_type == "producer" and producer_new == 1 %}
+
+        <main>
+            <div class="box">
+                <h1>Welcome back</h1>
+                <p>Here are some of your listed products</p>
+                 <!-- Displays all products that are fetched from the products table --> 
+                {% for product in products %}
+                    <section style="padding: 15px; border: 1px solid black; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 10px;">
+                        <img src="{{product['image']}}" alt="" width="90px" style="border-radius: 10px;">
+                        <p>{{product["product"]}}</p>
+                    </section>
+
+                {% endfor %}
+                
+            </div>
+            <div class="box">
+                <h2>Add new products</h2>
+                <form action="/add_product" method="post">
+                    <h3>Product name</h3>
+                    <input type="text" name="product" placeholder="Milk">
+                    <h3>Image link</h3>
+                    <p>Please upload a link of the image you would like to display</p>
+                    <input type="text" name="image_link">
+                    <h3>Description</h3>
+                    
+                    <textarea name="description" style="max-width: 300px;" maxlength="1000"></textarea>
+                    <h3>Price</h3>
+                    <input type="number" name="price" placeholder="8.99" step="0.01" min="0">
+                    <h3>Please choose a category for this product</h3>
+                    <div style="display: flex; align-items: center;">
+                        <p>Meat</p>
+                        <input type="checkbox" name="category" value="Meat" style="width: 30px; margin-left: 10px;" id="checkbox_1">
+                    </div>
+
+
+
+
+                    
+                    <div style="display: flex; align-items: center;">
+                        <p>Dairy</p>
+                        <input type="checkbox" name="category" value="Dairy" style="width: 30px; margin-left: 10px;" id="checkbox_2">
+                    </div>
+
+
+
+
+
+
+                    <div style="display: flex; align-items: center;">
+                        <p>Vegetables</p>
+                        <input type="checkbox" name="category" value="Vegetables" style="width: 30px; margin-left: 10px;" id="checkbox_3">
+                    </div>
+
+
+
+
+
+
+                    <div style="display: flex; align-items: center;">
+                        <p>Poultry</p>
+                        <input type="checkbox" name="category" value="Poultry" style="width: 30px; margin-left: 10px;" id="checkbox_4">
+                    </div>
+
+
+
+
+
+
+
+                    <div style="display: flex; align-items: center;">
+                        <p>Fruits</p>
+                        <input type="checkbox" name="category" value="Fruits" style="width: 30px; margin-left: 10px;" id="checkbox_5">
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <p>Horticultural</p>
+                        <input type="checkbox" name="category" value="Horticultural" style="width: 30px; margin-left: 10px;" id="checkbox_6">
+                    </div>
+                    
+                    <button type="submit" id="form_button">Upload</button>
+                </form>
+                <script src="{{url_for('static', filename='js/category.js')}}"></script>
+            </div>
+            <form action="/special_offers" class="box" method="post">
+                <h1>You can give special offers to loyalty users</h1>
+                <h2>Name of special offer</h2>
+                <input type="text" name="product">
+                <h2>Description of special offer</h2>
+                
+                <textarea name="desc" style="max-width: 300px; " maxlength="1000"></textarea>
+
+                <h2>Image of special offer (image link)</h2>
+                <input type="text" name="image">
+                <h2>Price of special offer</h2>
+                <input type="number" name="price" placeholder="8.99" step="0.01" min="0">
+                <button type="submit">Submit</button>
+            </form>
+            <div class="box">
+                <h1>Account settings</h1>
+                <a href="/account_settings"><button>View Account Settings</button></a>
+                
+                <h1>Manage Products</h1>
+                <a href="/manage_orders"><button>Manage</button></a>
+                
+                <a href=""><button>Logout</button></a>
+            </div>
+            
+        </main>
+     <!-- Checks on if the user is a customer. If user is customer the html content below will be displayed for customer --> 
+    {% elif user_type == "customer" %}
+        
+        <main>
+            <div class="box">
+                <h1>Welcome Back</h1>
+                <p>Here are the most recent things you have ordered</p>
+                {% for order in orders %}
+                    <section style="padding: 15px; border: 1px solid black; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
+                        <img src="{{order['image']}}" alt="" width="90px" style="border-radius: 10px;">
+                        <p>{{order["product"]}}</p>
+                    </section>
+
+                {% endfor %}
+            </div>
+            <div class="box">
+                 <!-- If user has loyalty scheme they will be able to see what what they have --> 
+                <h1>Loyalty scheme</h1>
+                {% if loyalty == 1 %}
+                    <p>Loyalty scheme gives you discounts and special offers on products sold on the website. If you wish to manage your loyatly scheme please visit your account settings</p>
+                    <p>Loyalty scheme offers the following things</p>
+                    <ul>
+                        <li>20% Discount on all products sold</li>
+                        <li>Special offers made by producers</li>
+                    </ul>
+                {% else %}
+                    <a href="/get_loyalty"><button>Get loyalty</button></a>
+                {% endif %}
+            </div>
+            
+            <div class="box">
+                 <!-- if user has loyalty scheme they will be able to see the special offers made by producers --> 
+                <h1>Special offers</h1>
+                <p>Special offers made by producers will display here</p>
+                {% if loyalty == 1 %}
+                    {% for special_offer in special_offers %}
+                        <section style="padding: 15px; border: 1px solid black; border-radius: 5px; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 15px;">
+                            <img src="{{special_offer['image']}}" alt="" width="120px" style="border-radius: 10px;">
+                            <h2>{{special_offer["product"]}}</h2>
+                            
+                            <p>{{special_offer["desc"]}}</p>
+                            <p>£{{special_offer["price"]}}</p>
+                            <a href="{{url_for('buy_special_offer', product_id=special_offer['id'])}}"><button>Buy</button></a>
+                        </section>
+                    {% endfor %}
+
+                {% endif %}
+            </div>
+            <div class="box">
+                <h1>Account settings</h1>
+                <a href="/account_settings"><button>View Account Settings</button></a>
+                <h1>View orders</h1>
+                <a href="/orders"><button>View</button></a>
+                
+                
+                <a href="/logout"><button>Logout</button></a>
+            </div>
+        </main>
+    {% else %}
+     <!-- if a user with no user type gets onto the dashbaord this message will display --> 
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-bottom: 500px;" class="error_page">
+            <p>An error occured. Please contact support or try again later</p>
+            <a href="/"><button>Home</button></a>
+        </div>
+    {% endif %}
+
+{% endblock %}

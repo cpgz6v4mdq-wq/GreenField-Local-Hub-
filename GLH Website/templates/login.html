@@ -1,0 +1,47 @@
+<!-- Allows for the navbar and footer to be used across all html files --> 
+{% extends "base.html" %}
+
+<!-- Allows for the html content to be displayed --> 
+{% block content %}
+    <!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}Login & signup{% endblock %}
+    </title>
+    <link rel="stylesheet" href="/static/css/login.css">
+    <main>
+        <img src="/static/Images/Login & signup/farm-3455131_960_720.jpg" alt="">
+        <div class="app_style">
+            <h1>Welcome to GreenField Local Hub</h1>
+            <p>Would you like to sign up or login?</p>
+            <div class="option">
+                <button id="signup">Signup</button>
+                <button id="login">Login</button>
+                
+            </div>
+            <p id="loginTypeMessage"></p>
+            <p>Choose customer or producer</p>
+            <div class="option">
+                <button id="customer">Customer</button>
+                <button id="producer">Producer</button>
+                
+            </div>
+            <p id="customer_message"></p>
+            <div id="app">
+                
+            </div>
+            {% if display_message %}
+
+                <p style="font-size: larger; font-weight: bolder;" id="display">{{display_message}}</p>
+                <script>
+                    //Display message will disappear after 3 seconds
+                    const display = document.getElementById("display")
+                    setTimeout(function() {
+                        display.innerText = ""
+                    }, 3000)
+                </script>
+            {% endif %}
+        </div>
+    </main>
+    <script src="/static/js/handleLogin.js"></script>
+{% endblock %}

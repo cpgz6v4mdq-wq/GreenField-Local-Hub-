@@ -1,0 +1,75 @@
+section form {
+    display: flex;
+    align-items: center;
+}
+
+section form input {
+    width: 231px;
+    
+    border: 0.5px solid black;
+    border-radius: 8px;
+    padding: 5px;
+    margin-left: 15px;
+}
+section p {
+    font-size: 20px;
+}
+
+section form button {
+    margin-left: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(15, 15, 15, 0.274);
+    width: 85px;
+    height: 33px;
+    font-size: 14px;
+    background-color: #ACD2ED;
+    box-shadow: 0px 3px 4.6px 0px #1f1e1e37;
+    
+}
+
+section form button:hover {
+    background-color: #91b5ce;
+}
+
+section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+section img {
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.Delete button {
+    background-color: #F22B2B;
+    width: 231px;
+    height: 33px;
+    border: none;
+    box-shadow: 0px 5px 4.7px 0px rgba(0, 0, 0, 0.39);
+    border-radius: 8px;
+    margin: 5px;
+}
+
+.Delete button:hover {
+    background-color: #cc2525;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 600px;
+}
+
+@media (max-width: 800px) {
+    section form {
+        flex-direction: column;
+    }
+    section form button {
+        margin-top: 15px;
+    }
+}

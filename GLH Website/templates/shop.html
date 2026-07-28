@@ -1,0 +1,84 @@
+<!-- Allows for the navbar and footer to be used across all html files --> 
+{% extends "base.html" %}
+
+<!-- Allows for the html content to be displayed --> 
+{% block content %}
+    <!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}Shop{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/shop.css')}}">
+    <h1 style="text-align: center;">Shop</h1>
+    <main>
+        <div class="category">
+            
+            <h1>Category</h1>
+            <form action="/shop" method="post">
+                <div>
+                    <input type="checkbox" name="category" value="Vegetables" id="checkbox_1">
+                    <p>Vegetables</p>
+                    
+                </div>
+                <div>
+                    <input type="checkbox" name="category" value="Dairy" id="checkbox_2">
+                    <p>Dairy</p>
+                    
+                </div>
+                <div>
+                    <input type="checkbox" name="category" value="Meat" id="checkbox_3">
+                    <p>Meat</p>
+                    
+                </div>
+                <div>
+                    <input type="checkbox" name="category" value="Horticultural" id="checkbox_4">
+                    <p>Horticultural</p>
+                    
+                </div>
+                <div>
+                    <input type="checkbox" name="category" value="Poultry" id="checkbox_5">
+                    <p>Poultry</p>
+                    
+                </div>
+                <div>
+                    <input type="checkbox" name="category" value="Fruits" id="checkbox_6">
+                    <p>Fruits</p>
+                    
+                </div>
+                <button type="submit" id="form_button">Apply</button>
+                
+            </form>
+            <a href="/shop"><button>Clear</button></a>
+        </div>
+         <div class="shop">
+             <!-- Displays all products that are fetched from the products table -->
+            {% for product in products %}
+                <section class="product">
+                    <img src="{{product['image']}}" alt="{{product['image']}}" width="120px">
+                    <h1>{{product["product"]}}</h1>
+                    
+                    <p>{{product["desc"]| truncate(40)}}</p>
+                    <div style="display: flex; align-items: center; flex-direction: column;
+                    justify-content: center;">
+                        <!-- if user has loyalty scheme they will be able to see the discounts on products --> 
+                        {% if loyalty == 1 %}
+                            
+                            <div style="display: flex;">
+                                <p style="margin-left: 15px; text-decoration: line-through; color: gray;">£{{product["price"]}}</p>
+                                <p style="margin-left: 15px;">£{{(product["price"] | float * 0.8) | round(2)}}</p>
+                                
+
+                            </div>
+                            {% else %}
+                                <p style="margin-left: 15px;">£{{product["price"]}}</p>
+                        {% endif %}
+                        <a href="{{url_for('view_product', product_id=product['id'])}}"><button>Buy</button></a>
+                    </div>
+
+                </section>
+            {% endfor %}
+         </div>
+    </main>
+    <script src="{{url_for('static', filename='js/category.js')}}"></script>
+
+{% endblock %}

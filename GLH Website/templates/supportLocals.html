@@ -1,0 +1,58 @@
+<!-- Allows for the navbar and footer to be used across all html files --> 
+{% extends "base.html" %}
+
+<!-- Allows for the html content to be displayed --> 
+{% block content %}
+<!-- Displays the title for webpage -->
+    <title>
+        
+        {% block title %}Support the locals{% endblock %}
+    </title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/supportlocalfarms.css')}}">
+<div class="start">
+            <h1>Greenfield Local Hub</h1>
+            <h2>Where local producers sell and locals buy</h2>
+            <div>
+                <a href="/shop"><Button class="blue_btn">Shop</Button></a>
+                <a href="/map"><button class="blue_btn">Map</button></a>
+            </div>
+        </div>
+<main>
+    <section class="section_one">
+       <div class="content">
+         <h1>Local food producers</h1>
+            <p>Our goal is to help local food producers by giving them a simple and modern platform to sell their products. GLH provides farmers with the tools they need to reach more customer without losing the community driven spirit of local food. We believe local producers deserve visibility, fair support, and a direct connection to the people who value local food.</p>
+       </div>
+        <div class="section_one_imgs">
+            <img class="image_one" src="{{url_for('static', filename='Images/Support Local Farms/People_gardening.jpg')}}" alt="People gardening outside">
+            <img class="image_two" src="{{url_for('static', filename='Images/Support Local Farms/OIP.webp')}}" alt="Two indivuals putting cabbage in a bag">
+        </div>
+    </section>
+    <section>
+        <img src="{{url_for('static', filename='Images/Support Local Farms/woman_at_market.webp')}}" alt="Woman selling vegtables at local food market">
+       <div class="content">
+             <h1>Make buying local easier for everyone</h1>
+            <p>We are committed to making it effortless for customers to discover and buy from businesses in their area. Our website brings together a wide range of locally produced foods into one place allowing customers to explore and order from their local food producers</p>
+       </div>
+    </section>
+    <section>
+        <div class="content">
+             <h1>Strengthen community and sustainability</h1>
+            <p>GLH exists to build stronger and more sustainable communities. When people buy local, they support farmers. Our mission is to create a hub that encourages customers to buy food from their local farms and food producers. Together we are creating a more connected future for everyone in our local communities</p>
+        </div>
+        <img src="{{url_for('static', filename='Images/Support Local Farms/farm-animals.jpg')}}" alt="A group of animals together on a farm">
+    </section>
+    <div class="join_us">
+            <div class="join_us_content">
+                <h1>Join us</h1>
+                <p>Your support helps your local food producers and farms</p>
+            </div>
+            <form class="email_input" action="/marketing" method="post">
+                <p>Enter Email</p>
+                <input type="email" placeholder="bill@example.com" name="email">
+                <button type="submit" onclick="marketing()">></button>
+                <p id="output_message"></p>
+            </form>
+        </div>
+</main>
+{% endblock %}
